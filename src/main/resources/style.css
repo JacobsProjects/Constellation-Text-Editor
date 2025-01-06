@@ -1,0 +1,124 @@
+.root {
+    -fx-background-image: url('/gradient.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-font-family: 'JetBrains Mono';
+}
+
+.text-area {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-family: 'JetBrains Mono';
+    -fx-font-size: 14px;
+    -fx-pref-width: 100%;
+    -fx-pref-height: 100%;
+    -fx-min-height: 0;
+    -fx-font-feature-settings: "liga" on, "calt" on;
+    
+}
+
+.text-area .content {
+    -fx-background-color: transparent;
+}
+
+.text-area:focused {
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 15px;
+    -fx-fit-to-height: true;
+    -fx-fit-to-width: true;
+    -fx-border-color: transparent transparent transparent #506470; 
+    -fx-border-width: 0 0 0 1px; 
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.text {
+    -fx-fill: #506470;
+    -fx-font-family: 'JetBrains Mono';
+    -fx-font-size: 14px;
+}
+
+.text-area .paragraph-box {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.text-area .paragraph-box:has-caret {
+    -fx-background-color: transparent;
+}
+
+.lineNumberBox {
+    -fx-text-fill: #506470; 
+    -fx-text-fill: #ecf0f1; 
+    -fx-padding: 5px;
+    -fx-font-family: 'JetBrains Mono';
+    -fx-font-size: 14px;
+    -fx-border-color: transparent #506470 transparent transparent; 
+    -fx-border-width: 0 1px 0 0; 
+}
+
+.line-number-text {
+    -fx-fill: #506470;  
+}
+
+.status-label {
+    -fx-text-fill: #506470;
+    -fx-font-family: 'JetBrains Mono';
+    -fx-font-size: 12px;
+}
+
+.status-bar {
+    -fx-background-color: linear-gradient(to top, #0a1e2b, #133348);
+    -fx-padding: 5 10 5 10;
+    -fx-border-color: #506470;
+    -fx-border-width: 1 0 0 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 83, 150, 0.2), 15, 0.4, 0, -4);
+}
+
+.menu-bar {
+    -fx-background-color: linear-gradient(to bottom, #0a1e2b, #133348); 
+    -fx-effect: dropshadow(gaussian, rgba(0, 83, 150, 0.2), 15, 0.4, 0, 4);
+    -fx-border-color: #506470;
+    -fx-border-width: 0 0 1 1; 
+}
+
+
+/* Menu item styling */
+.menu-bar .menu-button,
+.menu-bar .menu-item {
+    -fx-font-family: 'JetBrains Mono';
+    -fx-text-fill: #506470;
+}
+
+.menu-bar .menu .label {
+    -fx-font-family: 'JetBrains Mono';
+    -fx-text-fill: #506470;
+}
+
+/* star stuff (some of it's old but i don't care to delete it :-3)*/
+.star {
+    -fx-opacity: 0.2;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,0,0.8), 20, 0, 0, 0);
+}
+
+.star-animation {
+    -fx-animation: starTwinkle 3s infinite;
+}
+
+@keyframes starTwinkle {
+    0% { -fx-opacity: 0; }
+    50% { -fx-opacity: 1; }
+    100% { -fx-opacity: 0; }
+}

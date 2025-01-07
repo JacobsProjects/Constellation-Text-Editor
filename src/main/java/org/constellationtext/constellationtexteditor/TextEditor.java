@@ -18,6 +18,7 @@ import javafx.util.Duration;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 
+
 import java.io.*;
 
 public class TextEditor extends VBox {
@@ -361,7 +362,7 @@ public class TextEditor extends VBox {
         Label encoding = new Label("UTF-8");
 
         fileType = new Label("No Extension");
-
+ 
         position.getStyleClass().add("status-label");
         fileType.getStyleClass().add("status-label");
         encoding.getStyleClass().add("status-label");
@@ -509,8 +510,6 @@ public class TextEditor extends VBox {
         });
 
         viewMenu.getItems().addAll(opacityItem, textWrap, syntaxHighlighting);
-
-        
 
         newFile.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
         open.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));

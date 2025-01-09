@@ -5,7 +5,7 @@
     -fx-font-family: 'JetBrains Mono';
 }
 
-.text-area {
+.code-area {
     -fx-background-insets: 0;
     -fx-padding: 0;
     -fx-background-color: transparent;
@@ -19,11 +19,11 @@
     
 }
 
-.text-area .content {
+.code-area .content {
     -fx-background-color: transparent;
 }
 
-.text-area:focused {
+.code-area:focused {
     -fx-background-color: transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
@@ -50,12 +50,12 @@
     -fx-font-size: 14px;
 }
 
-.text-area .paragraph-box {
+.code-area .paragraph-box {
     -fx-background-color: transparent;
     -fx-padding: 0;
 }
 
-.text-area .paragraph-box:has-caret {
+.code-area .paragraph-box:has-caret {
     -fx-background-color: transparent;
 }
 
@@ -105,6 +105,53 @@
 .menu-bar .menu .label {
     -fx-font-family: 'JetBrains Mono';
     -fx-text-fill: #506470;
+}
+/* syntax highlighting stuff */
+/* Keywords (e.g., class, public, static) */
+.keyword {
+    -fx-fill: #569CD6; /* Light blue */
+    -fx-font-weight: bold;
+}
+
+/* Strings (e.g., "Hello World") */
+.string {
+    -fx-fill: #CE9178; 
+}
+
+/* Comments  */
+.comment {
+    -fx-fill: #6A9955; 
+    -fx-font-style: italic;
+}
+
+/* Brackets, Parentheses, Braces */
+.paren, .bracket, .brace {
+    -fx-fill: #DCDCAA; 
+}
+
+/* Semicolons */
+.semicolon {
+    -fx-fill: #D4D4D4; 
+}
+
+/* Make the cursor easier to see */
+.code-area .caret {
+    -fx-stroke: #FFFFFF;
+}
+
+/* Line numbers */
+.lineno {
+    -fx-text-fill: #858585; 
+}
+
+/* Selection highlight */
+.code-area .selection {
+    -fx-fill: #264F78;
+}
+
+/* Background color for highlighted search results */
+.search-highlight {
+    -fx-fill: #FFD700; 
 }
 
 /* star stuff (some of it's old but i don't care to delete it :-3)*/

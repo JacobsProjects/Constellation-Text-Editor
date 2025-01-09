@@ -8,21 +8,27 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.animation.Timeline;
 import javafx.animation.Interpolator;
+import java.util.Collections;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.util.Duration;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
+import org.fxmisc.richtext.CodeArea;
+import org.fxmisc.richtext.model.StyleSpansBuilder;
+
 import java.io.*;
+import java.util.Collection;
 
 // this code is basically unreadable i'm so sorry if you're reading this
 public class TextEditor extends VBox {
     private MenuBar menuBar;
-    private TextArea textArea;
+    private CodeArea textArea;
     private VBox lineNumberBox;
     private HBox statusBar;
     private File currentFile;
@@ -32,10 +38,11 @@ public class TextEditor extends VBox {
     private CtxFiles ctxtHandler;
     private Label fileType;
     private boolean syntaxHighlightingEnabled = false;
+    private AutoCloseable syntaxSubscription;
 
     public TextEditor() {
         menuBar = new MenuBar();
-        textArea = new TextArea();
+        textArea = new CodeArea();
         lineNumberBox = new VBox();
         ScrollPane lineNumberScrollPane = new ScrollPane(lineNumberBox);
         fileNameLabel = new Label("Untitled");
@@ -55,7 +62,7 @@ public class TextEditor extends VBox {
         lineNumberScrollPane.setFitToWidth(true);
         lineNumberScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        textArea.scrollTopProperty().addListener((obs, oldVal, newVal) -> {
+        textArea.estimatedScrollYProperty().addListener((obs, oldVal, newVal) -> {
             lineNumberBox.setTranslateY(-newVal.doubleValue());
         });
 
@@ -160,7 +167,7 @@ public class TextEditor extends VBox {
                     content = contentBuilder.toString();
                     reader.close();
                 }
-                textArea.setText(content.toString());
+                textArea.replaceText(content.toString());
                 lastSavedText = content.toString();
                 currentFile = file;
                 updateFileName();
@@ -241,7 +248,7 @@ public class TextEditor extends VBox {
                         }
                     }
                     
-                    textArea.setText(content);
+                    textArea.replaceText(content);
                     lastSavedText = content;
                     currentFile = file;
                     updateFileName();
@@ -299,18 +306,18 @@ public class TextEditor extends VBox {
     private void updateLineNumbers() {
         String text = textArea.getText();
         String[] lines = text.split("\n", -1);
-         
-        double lineHeight = textArea.getFont().getSize() * 1.5;
+
+        Font font = Font.font(textArea.getStyle());
+        double lineHeight = font.getSize() * 1.5;
         double viewportHeight = textArea.getHeight();
         int visibleLines = (int) Math.ceil(viewportHeight / lineHeight);
-        
+
         lineNumberBox.getChildren().clear();
-        
-        // Count wrapped lines for each actual line
+
         int totalVisualLines = 0;
         for (String line : lines) {
             if (textArea.isWrapText() && !line.isEmpty()) {
-                double textWidth = line.length() * textArea.getFont().getSize() * 0.6; 
+                double textWidth = line.length() * font.getSize() * 0.6; 
                 double availableWidth = textArea.getWidth() - 20; 
                 int wrappedLines = Math.max(1, (int) Math.ceil(textWidth / availableWidth));
                 totalVisualLines += wrappedLines;
@@ -318,7 +325,7 @@ public class TextEditor extends VBox {
                 totalVisualLines++;
             }
         }
-        
+
         int maxLines = Math.max(totalVisualLines, lines.length);
         for (int i = 1; i <= maxLines; i++) {
             Text lineNumber = new Text(String.valueOf(i));
@@ -341,13 +348,29 @@ public class TextEditor extends VBox {
             fileType.setText("No Extension");
         }
     }
-    private void applySyntaxHighlighting() {
-        if (!syntaxHighlightingEnabled) {
-            return;
-        } else{
-            // add logic here whenever i find a way to do it
+       private void applySyntaxHighlighting(){ // make sure to add an option for syntax when no coding extension or whatver idk blah blah blah
+        if (syntaxHighlightingEnabled) {
+            String fileName =  currentFile.getName();
+            int lastDotIndex = fileName.lastIndexOf('.');
+            if (lastDotIndex > 0 && lastDotIndex < fileName.length() - 1) {
+                String extension = fileName.substring(lastDotIndex + 1);
+                textArea.replaceText(extension); // here for troubleshooting
+            }
+        } else {
+            disableSyntaxHighlighting();
         }
-        
+    }
+   /*  private void applySyntaxHighlighting() { // make sure to add an option for syntax when no coding extension or whatver idk blah blah blah
+        if (syntaxHighlightingEnabled) {
+            SyntaxHighlighting.applyHighlighting(textArea);
+        } else {
+            disableSyntaxHighlighting();
+        }
+    }*/
+    private void disableSyntaxHighlighting() {
+        StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
+        spansBuilder.add(Collections.emptyList(), textArea.getText().length());
+        textArea.setStyleSpans(0, spansBuilder.create());
     }
 
     private void addStatusBar() {
@@ -502,10 +525,8 @@ public class TextEditor extends VBox {
         });
 
         syntaxHighlighting.setOnAction(e -> {
-            if (syntaxHighlighting.isSelected()) {
-                syntaxHighlightingEnabled = true;
-                applySyntaxHighlighting();
-            }
+            syntaxHighlightingEnabled = syntaxHighlighting.isSelected();
+            applySyntaxHighlighting();
         });
 
         viewMenu.getItems().addAll(opacityItem, textWrap, syntaxHighlighting);

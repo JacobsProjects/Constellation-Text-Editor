@@ -354,13 +354,15 @@ public class TextEditor extends VBox {
             int lastDotIndex = fileName.lastIndexOf('.');
             if (lastDotIndex > 0 && lastDotIndex < fileName.length() - 1) {
                 String extension = fileName.substring(lastDotIndex + 1);
-                textArea.replaceText(extension); // here for troubleshooting
+                if (extension.equals("java")) {
+                    SyntaxHighlighting.applyJavaHighlighting(textArea);
+                }
             }
         } else {
             disableSyntaxHighlighting();
         }
     }
-   /*  private void applySyntaxHighlighting() { // make sure to add an option for syntax when no coding extension or whatver idk blah blah blah
+   /*  private void applySyntaxHighlighting() { // old version of code, being rewritten
         if (syntaxHighlightingEnabled) {
             SyntaxHighlighting.applyHighlighting(textArea);
         } else {

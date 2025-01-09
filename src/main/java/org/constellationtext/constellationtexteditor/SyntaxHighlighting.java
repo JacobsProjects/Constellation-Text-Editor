@@ -46,7 +46,7 @@ public class SyntaxHighlighting {
         // Define C patterns here
     }
 
-    public static void applyHighlighting(CodeArea codeArea) {
+    public static void applyJavaHighlighting(CodeArea codeArea) {
         codeArea.richChanges()
                 .filter(ch -> !ch.getInserted().equals(ch.getRemoved()))
                 .subscribe(change -> codeArea.setStyleSpans(0, computeJavaHighlighting(codeArea.getText())));

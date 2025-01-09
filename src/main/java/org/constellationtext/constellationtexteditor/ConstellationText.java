@@ -16,8 +16,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
-
 import java.util.Random;
+import org.fxmisc.richtext.CodeArea;
 
 public class ConstellationText extends Application {
     private VBox root;

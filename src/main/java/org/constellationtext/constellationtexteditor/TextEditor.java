@@ -17,10 +17,9 @@ import javafx.animation.KeyValue;
 import javafx.util.Duration;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
-
-
 import java.io.*;
 
+// this code is basically unreadable i'm so sorry if you're reading this
 public class TextEditor extends VBox {
     private MenuBar menuBar;
     private TextArea textArea;

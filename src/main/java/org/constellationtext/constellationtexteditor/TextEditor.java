@@ -348,14 +348,16 @@ public class TextEditor extends VBox {
             fileType.setText("No Extension");
         }
     }
-       private void applySyntaxHighlighting(){ // make sure to add an option for syntax when no coding extension or whatver idk blah blah blah
+    private void applySyntaxHighlighting() { // make sure to add an option for syntax when no coding extension or whatver idk blah blah blah
         if (syntaxHighlightingEnabled) {
-            String fileName =  currentFile.getName();
+            String fileName = currentFile.getName();
             int lastDotIndex = fileName.lastIndexOf('.');
             if (lastDotIndex > 0 && lastDotIndex < fileName.length() - 1) {
                 String extension = fileName.substring(lastDotIndex + 1);
                 if (extension.equals("java")) {
                     SyntaxHighlighting.applyJavaHighlighting(textArea);
+                } else if (extension.equals("py") || extension.equals("python")) {
+                    SyntaxHighlighting.applyPythonHighlighting(textArea);
                 }
             }
         } else {

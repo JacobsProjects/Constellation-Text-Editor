@@ -153,6 +153,12 @@
 .search-highlight {
     -fx-fill: #FFD700; 
 }
+.operator { -fx-fill: #cc7832; }
+.number { -fx-fill: #6897bb; }
+.self { -fx-fill: #94558d; }
+.function { -fx-fill: #ffc66d; }
+.class { -fx-fill: #a9b7c6; }
+.decorator { -fx-fill: #bbb529; }
 
 /* star stuff (some of it's old but i don't care to delete it :-3)*/
 .star {

@@ -175,7 +175,5 @@ public class SyntaxHighlighting {
     }
 
 
-    // Add similar methods for other languages
-    // public static void applyPythonHighlighting(CodeArea codeArea) { ... }
-    // public static void applyCHighlighting(CodeArea codeArea) { ... }
+    // Add methods for other languages soon
 }

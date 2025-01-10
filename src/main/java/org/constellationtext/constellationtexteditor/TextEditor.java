@@ -38,7 +38,6 @@ public class TextEditor extends VBox {
     private CtxFiles ctxtHandler;
     private Label fileType;
     private boolean syntaxHighlightingEnabled = false;
-    private AutoCloseable syntaxSubscription;
 
     public TextEditor() {
         menuBar = new MenuBar();
@@ -308,7 +307,7 @@ public class TextEditor extends VBox {
         String[] lines = text.split("\n", -1);
 
         Font font = Font.font(textArea.getStyle());
-        double lineHeight = font.getSize() * 1.5;
+        double lineHeight = font.getSize() * 1.8;
         double viewportHeight = textArea.getHeight();
         int visibleLines = (int) Math.ceil(viewportHeight / lineHeight);
 
@@ -415,6 +414,7 @@ public class TextEditor extends VBox {
                     }
                 }
             }
+        // Add this in your constructor after creating the lineNumberScrollPane
 
             position.setText(String.format("Line: %d, Column: %d", line, column));
         });

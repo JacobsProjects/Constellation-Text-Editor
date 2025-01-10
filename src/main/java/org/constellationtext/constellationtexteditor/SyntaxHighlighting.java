@@ -75,12 +75,11 @@ public class SyntaxHighlighting {
         private static final String BRACE_PATTERN = "\\{|\\}";
         private static final String BRACKET_PATTERN = "\\[|\\]";
         
-        // Strings including raw strings, f-strings, and bytes
         private static final String STRING_PATTERN = 
-            "[rfbRFB]?\"\"\"([^\"\\\\]|\\\\.|\"(?!\"\")|\n)*\"\"\"|" +  // Triple double quotes
-            "[rfbRFB]?'''([^'\\\\]|\\\\.|'(?!'')|\n)*'''|" +           // Triple single quotes
-            "[rfbRFB]?\"([^\"\\\\]|\\\\.)*\"|" +                       // Double quotes
-            "[rfbRFB]?'([^'\\\\]|\\\\.)*'";                           // Single quotes
+            "[rfbRFB]?\"\"\"([^\"\\\\]|\\\\.|\"(?!\"\")|\n)*\"\"\"|" +
+            "[rfbRFB]?'''([^'\\\\]|\\\\.|'(?!'')|\n)*'''|" +          
+            "[rfbRFB]?\"([^\"\\\\]|\\\\.)*\"|" +                      
+            "[rfbRFB]?'([^'\\\\]|\\\\.)*'";                           
         
         // Comments including type hints
         private static final String COMMENT_PATTERN = 

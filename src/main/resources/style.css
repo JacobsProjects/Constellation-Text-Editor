@@ -7,7 +7,7 @@
 
 .code-area {
     -fx-background-insets: 0;
-    -fx-padding: 0;
+    -fx-padding: 5;
     -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-font-family: 'JetBrains Mono';

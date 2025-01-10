@@ -26,6 +26,8 @@ import java.io.*;
 import java.util.Collection;
 
 // this code is basically unreadable i'm so sorry if you're reading this
+
+// remember to fix textwrapping messing up line numbers
 public class TextEditor extends VBox {
     private MenuBar menuBar;
     private CodeArea textArea;
@@ -236,6 +238,7 @@ public class TextEditor extends VBox {
                     String content;
                     if (ctxtHandler.isCTXTFile(file)) {
                         content = ctxtHandler.readEncryptedFile(file);
+                        updateFileTypeLabel();
                     } else {    
                         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                             StringBuilder contentBuilder = new StringBuilder();
@@ -251,6 +254,7 @@ public class TextEditor extends VBox {
                     lastSavedText = content;
                     currentFile = file;
                     updateFileName();
+                    updateFileTypeLabel();
                     success = true;
                     
                 } catch (IOException e) {

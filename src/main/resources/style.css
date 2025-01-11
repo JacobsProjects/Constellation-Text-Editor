@@ -2,7 +2,7 @@
     -fx-background-image: url('/gradient.png');
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
-    -fx-font-family: 'JetBrains Mono';
+    -fx-font-family: 'Inter';
 }
 
 .code-area {
@@ -10,7 +10,7 @@
     -fx-padding: 5;
     -fx-background-color: transparent;
     -fx-text-fill: white;
-    -fx-font-family: 'JetBrains Mono';
+    -fx-font-family: 'Inter';
     -fx-font-size: 14px;
     -fx-pref-width: 100%;
     -fx-pref-height: 100%;
@@ -63,7 +63,7 @@
     -fx-text-fill: #506470; 
     -fx-text-fill: #ecf0f1; 
     -fx-padding: 5px;
-    -fx-font-family: 'JetBrains Mono';
+    -fx-font-family: 'Inter';
     -fx-font-size: 14px;
     -fx-border-color: transparent #506470 transparent transparent; 
     -fx-border-width: 0 1px 0 0; 

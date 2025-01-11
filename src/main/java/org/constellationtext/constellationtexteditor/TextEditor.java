@@ -148,7 +148,10 @@ public class TextEditor extends VBox {
         fileChooser.getExtensionFilters().addAll(
             new FileChooser.ExtensionFilter("All Files", "*.*"),
             new FileChooser.ExtensionFilter("Text Files", "*.txt"),
-            new FileChooser.ExtensionFilter("CTXT Files", "*.ctxt")
+            new FileChooser.ExtensionFilter("CTXT Files", "*.ctxt"),
+            new FileChooser.ExtensionFilter("Java Files", "*.java"),
+            new FileChooser.ExtensionFilter("Python Files", "*.py" , "*.python")
+
         );
         File file = fileChooser.showOpenDialog(getScene().getWindow());
 

@@ -33,9 +33,9 @@ public class ConstellationText extends Application {
         VBox.setVgrow(mainContainer, Priority.ALWAYS);
 
 
-        Font.loadFont(getClass().getResourceAsStream("/fonts/JetBrainsMono-Regular.ttf"), 16);
-        Font.loadFont(getClass().getResourceAsStream("/fonts/JetBrainsMono-Bold.ttf"), 16);
-        Font.loadFont(getClass().getResourceAsStream("/fonts/JetBrainsMono-Medium.ttf"), 16);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/SourceCodePro-Regular.ttf"), 16);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/SourceCodePro-Bold.ttf"), 16);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/SourceCodePro-Medium.ttf"), 16);
 
         
         stars.setPrefSize(1200, 800);

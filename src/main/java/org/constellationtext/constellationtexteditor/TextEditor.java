@@ -40,6 +40,7 @@ public class TextEditor extends VBox {
     private CtxFiles ctxtHandler;
     private Label fileType;
     private boolean syntaxHighlightingEnabled = false;
+    private boolean syntaxHighlightingOnAllFiles = false;
 
     public TextEditor() {
         menuBar = new MenuBar();
@@ -176,8 +177,21 @@ public class TextEditor extends VBox {
                 currentFile = file;
                 updateFileName();
                 updateFileTypeLabel();
-                
-
+                String fileName = currentFile.getName();
+                int lastDotIndex = fileName.lastIndexOf('.');
+                if (syntaxHighlightingEnabled){
+                if (lastDotIndex > 0 && lastDotIndex < fileName.length() - 1) {
+                    String extension = fileName.substring(lastDotIndex + 1).toUpperCase();
+                    fileType.setText(extension);
+                    if (extension.equals("java")) {
+                        SyntaxHighlighting.applyJavaHighlighting(textArea);
+                    } else if (extension.equals("py") || extension.equals("python")) {
+                        SyntaxHighlighting.applyPythonHighlighting(textArea);
+                    } else {
+                        //SyntaxHighlighting.allFileHighlighting(textArea); this isn't done, will come back later and finish
+                    }
+                }
+            }
             } catch (IOException e) {
                 showError("Error opening file", e.getMessage());
             }
@@ -510,6 +524,8 @@ public class TextEditor extends VBox {
         Label opacityLabel = new Label("Window Opacity");
         CheckMenuItem textWrap = new CheckMenuItem("Line Wrap");
         CheckMenuItem syntaxHighlighting = new CheckMenuItem("Syntax Highlight");
+        CheckMenuItem highlightingOnAllFiles = new CheckMenuItem("Highlighting on all files");
+        highlightingOnAllFiles.setVisible(false);
     
         //opacity things
         Slider opacitySlider = new Slider(0.1, 1.0, 0.8); // min, max, default (incase i forget lmao)
@@ -537,10 +553,17 @@ public class TextEditor extends VBox {
 
         syntaxHighlighting.setOnAction(e -> {
             syntaxHighlightingEnabled = syntaxHighlighting.isSelected();
+            highlightingOnAllFiles.setVisible(syntaxHighlighting.isSelected());
             applySyntaxHighlighting();
         });
 
-        viewMenu.getItems().addAll(opacityItem, textWrap, syntaxHighlighting);
+        // not done yet
+        highlightingOnAllFiles.setOnAction(e -> {
+            syntaxHighlightingEnabled = highlightingOnAllFiles.isSelected();
+            applySyntaxHighlighting();
+        });
+
+        viewMenu.getItems().addAll(opacityItem, textWrap, syntaxHighlighting, highlightingOnAllFiles);
 
         newFile.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
         open.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
@@ -563,6 +586,9 @@ public class TextEditor extends VBox {
 
         HBox.setHgrow(leftSpacer, Priority.ALWAYS);
         HBox.setHgrow(rightSpacer, Priority.ALWAYS);
+
+        leftSpacer.setMinWidth(Region.USE_PREF_SIZE);
+        rightSpacer.setMinWidth(Region.USE_PREF_SIZE);
 
         Menu leftSpacerMenu = new Menu("");
         Menu rightSpacerMenu = new Menu("");

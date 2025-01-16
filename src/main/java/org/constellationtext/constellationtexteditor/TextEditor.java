@@ -545,7 +545,7 @@ public class TextEditor extends VBox {
         opacityItem.setHideOnClick(false);
 
         // end of opacity things
-
+//test
         textWrap.setOnAction(e -> {
             textArea.setWrapText(textWrap.isSelected());
             updateLineNumbers();

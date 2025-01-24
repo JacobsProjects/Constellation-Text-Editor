@@ -5,6 +5,8 @@ module org.constellationtext.constellationtexteditor {
     requires org.fxmisc.flowless;
     requires reactfx;
 
+
     opens org.constellationtext.constellationtexteditor to javafx.fxml;
     exports org.constellationtext.constellationtexteditor;
+    
 }

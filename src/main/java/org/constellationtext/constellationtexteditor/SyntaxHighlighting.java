@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class SyntaxHighlighting {
 
-    // Define syntax patterns for different languages here
+    // Define syntax patterns for languages for the auto detection feature thing
     private static final Pattern JAVA_PATTERNS = Pattern.compile(
         "\\b(class|public|private|protected|void|static|new)\\b|" +
         "\\b(String|int|boolean|double|float)\\b|" +
@@ -26,7 +26,6 @@ public class SyntaxHighlighting {
         int javaScore = countMatches(JAVA_PATTERNS, text);
         int pythonScore = countMatches(PYTHON_PATTERNS, text);
 
-        // Determine the most likely language
         if (javaScore > pythonScore && javaScore > 3) {
             return "java";
         } else if (pythonScore > javaScore && pythonScore > 3) {
@@ -47,40 +46,50 @@ public class SyntaxHighlighting {
 
     // Java syntax patterns
     public static class JavaSyntax {
-        private static final String[] KEYWORDS = new String[] {
+        private static final String[] KEYWORDS = {
             "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const",
             "continue", "default", "do", "double", "else", "enum", "extends", "final", "finally", "float",
-            "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
-            "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp",
-            "super", "switch", "synchronized", "this", "throw", "throws", "transient", "try", "void", "volatile", "while"
+            "for", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
+            "new", "null", "package", "private", "protected", "public", "return", "short", "static",
+            "strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient", 
+            "try", "void", "volatile", "while", "record", "var", "yield", "sealed", "non-sealed", "permits"
         };
-
+    
+        // Primitive types
+        private static final String[] PRIMITIVE_TYPES = {
+            "byte", "short", "int", "long", "float", "double", "boolean", "char", "void"
+        };
+    
+        // Enhanced regex patterns with more nuanced matching
         private static final String KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
-        private static final String PAREN_PATTERN = "\\(|\\)";
-        private static final String BRACE_PATTERN = "\\{|\\}";
-        private static final String BRACKET_PATTERN = "\\[|\\]";
-        private static final String SEMICOLON_PATTERN = "\\;";
+        private static final String PRIMITIVE_TYPE_PATTERN = "\\b(" + String.join("|", PRIMITIVE_TYPES) + ")\\b";
+        private static final String OPERATOR_PATTERN = "([+\\-*/%=<>&|^~!]+)";
+        private static final String NUMBER_PATTERN = "\\b(\\d+\\.?\\d*[fFdD]?|0[xX][0-9a-fA-F]+)\\b";
         private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
-        private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
-
+        private static final String CHAR_PATTERN = "'(?:[^'\\\\]|\\\\.)'";
+        private static final String COMMENT_SINGLE_LINE_PATTERN = "//[^\n]*";
+        private static final String COMMENT_MULTI_LINE_PATTERN = "/\\*(.|\\R)*?\\*/";
+        private static final String ANNOTATION_PATTERN = "@\\w+";
+    
+        // Comprehensive pattern compilation
         private static final Pattern PATTERN = Pattern.compile(
-                "(?<KEYWORD>" + KEYWORD_PATTERN + ")"
-                + "|(?<PAREN>" + PAREN_PATTERN + ")"
-                + "|(?<BRACE>" + BRACE_PATTERN + ")"
-                + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
-                + "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
-                + "|(?<STRING>" + STRING_PATTERN + ")"
-                + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
+            "(?<KEYWORD>" + KEYWORD_PATTERN + ")" +
+            "|(?<PRIMITIVE>" + PRIMITIVE_TYPE_PATTERN + ")" +
+            "|(?<OPERATOR>" + OPERATOR_PATTERN + ")" +
+            "|(?<NUMBER>" + NUMBER_PATTERN + ")" +
+            "|(?<STRING>" + STRING_PATTERN + ")" +
+            "|(?<CHAR>" + CHAR_PATTERN + ")" +
+            "|(?<COMMENT_SINGLE>" + COMMENT_SINGLE_LINE_PATTERN + ")" +
+            "|(?<COMMENT_MULTI>" + COMMENT_MULTI_LINE_PATTERN + ")" +
+            "|(?<ANNOTATION>" + ANNOTATION_PATTERN + ")"
         );
     }
 
     public static class PythonSyntax {
         private static final String[] KEYWORDS = new String[] {
-            // Python keywords
             "False", "None", "True", "and", "as", "assert", "async", "await", "break", "class", "continue",
             "def", "del", "elif", "else", "except", "finally", "for", "from", "global", "if", "import", "in",
             "is", "lambda", "nonlocal", "not", "or", "pass", "raise", "return", "try", "while", "with", "yield",
-            // Built-in functions
             "print", "len", "range", "str", "int", "float", "list", "dict", "set", "tuple", "super",
             "isinstance", "type", "input", "open", "map", "filter", "sum", "max", "min", "abs", "round"
         };

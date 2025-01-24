@@ -116,16 +116,25 @@ public class TextEditor extends VBox {
     public ButtonType showSaveConfirmation() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Unsaved Changes");
-        alert.setHeaderText("Do you want to save your changes?");
-        alert.setContentText("Your changes will be lost if you don't save.");
-
-        ButtonType typeYes = new ButtonType("Yes");
-        ButtonType typeNo = new ButtonType("No");
-        ButtonType typeCancel = new ButtonType("Cancel");
-
-        alert.getButtonTypes().setAll(typeYes, typeNo, typeCancel);
-
-        return alert.showAndWait().orElse(ButtonType.CANCEL);
+        alert.setHeaderText("You have unsaved changes");
+        alert.setContentText("Do you want to save your changes before closing?\n\nIf you don't save, your recent work will be lost.");
+    
+        alert.getDialogPane().getStyleClass().add("save-confirmation-dialog");
+    
+        ButtonType saveButton = new ButtonType("Save", ButtonBar.ButtonData.YES);
+        ButtonType dontSaveButton = new ButtonType("Don't Save", ButtonBar.ButtonData.NO);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+    
+        alert.getButtonTypes().setAll(saveButton, dontSaveButton, cancelButton);
+    
+        alert.getDialogPane().setStyle(
+            "-fx-font-family: 'Inter', sans-serif;" +
+            "-fx-font-size: 14px;" +
+            "-fx-background-color: #0a1e2b;" +
+            "-fx-text-fill: #ecf0f1;"
+        );
+    
+        return alert.showAndWait().orElse(cancelButton);
     }
 
     private void handleNew() {
@@ -188,7 +197,7 @@ public class TextEditor extends VBox {
                     } else if (extension.equals("py") || extension.equals("python")) {
                         SyntaxHighlighting.applyPythonHighlighting(textArea);
                     } else {
-                        //SyntaxHighlighting.allFileHighlighting(textArea); this isn't done, will come back later and finish
+                        SyntaxHighlighting.applyAutoHighlighting(textArea); //this isn't done, will come back later and finish
                     }
                 }
             }
@@ -371,10 +380,8 @@ public class TextEditor extends VBox {
     private void applySyntaxHighlighting() {
         if (syntaxHighlightingEnabled) {
             if (syntaxHighlightingOnAllFiles) {
-                // Auto-detect and apply highlighting
                 SyntaxHighlighting.applyAutoHighlighting(textArea);
             } else {
-                // Existing extension-based highlighting
                 if (currentFile != null) {
                     String fileName = currentFile.getName();
                     int lastDotIndex = fileName.lastIndexOf('.');
@@ -566,7 +573,6 @@ public class TextEditor extends VBox {
 
         // not done yet (not working at all lmao don;t fool yourself future jagob)
         highlightingOnAllFiles.setOnAction(e -> {
-            syntaxHighlightingEnabled = highlightingOnAllFiles.isSelected();
             applySyntaxHighlighting();
         });
 

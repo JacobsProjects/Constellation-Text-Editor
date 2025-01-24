@@ -94,6 +94,20 @@
     -fx-border-width: 0 0 1 1; 
 }
 
+.save-confirmation-dialog {
+    -fx-background-color: #0a1e2b;
+    -fx-text-fill: #ecf0f1;
+}
+
+.save-confirmation-dialog .header-panel {
+    -fx-background-color: #133348;
+}
+
+.save-confirmation-dialog .button {
+    -fx-background-color: #506470;
+    -fx-text-fill: white;
+}
+
 
 /* Menu item styling */
 .menu-bar .menu-button,

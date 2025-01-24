@@ -9,6 +9,42 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SyntaxHighlighting {
+
+    // Define syntax patterns for different languages here
+    private static final Pattern JAVA_PATTERNS = Pattern.compile(
+        "\\b(class|public|private|protected|void|static|new)\\b|" +
+        "\\b(String|int|boolean|double|float)\\b|" +
+        "\\b(System\\.out\\.println)\\b"
+    );
+    private static final Pattern PYTHON_PATTERNS = Pattern.compile(
+        "\\b(def|class|import|from|if|elif|else|while|for|in|return)\\b|" +
+        "\\b(print|len|range|str|int|float|list|dict)\\b|" +
+        "\\b(self|None|True|False)\\b"
+    );
+    public static String detectLanguage(String text) {
+        // Score each language based on pattern matches
+        int javaScore = countMatches(JAVA_PATTERNS, text);
+        int pythonScore = countMatches(PYTHON_PATTERNS, text);
+
+        // Determine the most likely language
+        if (javaScore > pythonScore && javaScore > 3) {
+            return "java";
+        } else if (pythonScore > javaScore && pythonScore > 3) {
+            return "python";
+        }
+        return "unknown";
+    }
+
+    private static int countMatches(Pattern pattern, String text) {
+        Matcher matcher = pattern.matcher(text);
+        int count = 0;
+        while (matcher.find()) {
+            count++;
+        }
+        return count;
+    }
+
+
     // Java syntax patterns
     public static class JavaSyntax {
         private static final String[] KEYWORDS = new String[] {
@@ -120,6 +156,19 @@ public class SyntaxHighlighting {
         codeArea.richChanges()
                 .filter(ch -> !ch.getInserted().equals(ch.getRemoved()))
                 .subscribe(change -> codeArea.setStyleSpans(0, computePythonHighlighting(codeArea.getText())));
+    }
+    public static void applyAutoHighlighting(CodeArea textArea) {
+        String text = textArea.getText();
+        String detectedLanguage = detectLanguage(text);
+        
+        switch (detectedLanguage) {
+            case "java":
+                applyJavaHighlighting(textArea);
+                break;
+            case "python":
+                applyPythonHighlighting(textArea);
+                break;
+        }
     }
 
     private static StyleSpans<Collection<String>> computeJavaHighlighting(String text) {

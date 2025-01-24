@@ -368,16 +368,24 @@ public class TextEditor extends VBox {
             fileType.setText("No Extension");
         }
     }
-    private void applySyntaxHighlighting() { // make sure to add an option for syntax when no coding extension or whatver idk blah blah blah
+    private void applySyntaxHighlighting() {
         if (syntaxHighlightingEnabled) {
-            String fileName = currentFile.getName();
-            int lastDotIndex = fileName.lastIndexOf('.');
-            if (lastDotIndex > 0 && lastDotIndex < fileName.length() - 1) {
-                String extension = fileName.substring(lastDotIndex + 1);
-                if (extension.equals("java")) {
-                    SyntaxHighlighting.applyJavaHighlighting(textArea);
-                } else if (extension.equals("py") || extension.equals("python")) {
-                    SyntaxHighlighting.applyPythonHighlighting(textArea);
+            if (syntaxHighlightingOnAllFiles) {
+                // Auto-detect and apply highlighting
+                SyntaxHighlighting.applyAutoHighlighting(textArea);
+            } else {
+                // Existing extension-based highlighting
+                if (currentFile != null) {
+                    String fileName = currentFile.getName();
+                    int lastDotIndex = fileName.lastIndexOf('.');
+                    if (lastDotIndex > 0 && lastDotIndex < fileName.length() - 1) {
+                        String extension = fileName.substring(lastDotIndex + 1);
+                        if (extension.equals("java")) {
+                            SyntaxHighlighting.applyJavaHighlighting(textArea);
+                        } else if (extension.equals("py") || extension.equals("python")) {
+                            SyntaxHighlighting.applyPythonHighlighting(textArea);
+                        }
+                    }
                 }
             }
         } else {
@@ -509,7 +517,6 @@ public class TextEditor extends VBox {
             }
         });
     }
-
     private void setupMenuBar() {
         Menu fileMenu = new Menu("File");
         MenuItem newFile = new MenuItem("New");
@@ -557,7 +564,7 @@ public class TextEditor extends VBox {
             applySyntaxHighlighting();
         });
 
-        // not done yet
+        // not done yet (not working at all lmao don;t fool yourself future jagob)
         highlightingOnAllFiles.setOnAction(e -> {
             syntaxHighlightingEnabled = highlightingOnAllFiles.isSelected();
             applySyntaxHighlighting();

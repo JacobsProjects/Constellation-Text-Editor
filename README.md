@@ -5,7 +5,8 @@ Constellation is a modern and lightweight text editor designed for a clean and e
 ## Features
 
 *   **Modern Interface:** Constellation boasts a clean and modern look and feel, designed to minimize distractions and maximize your focus on writing.  
-    [![Constellation Text Editor Screenshot](https://i.imgur.com/TMPvhoy_d.webp?maxwidth=760&fidelity=grand)](https://i.imgur.com/TMPvhoy_d.webp?maxwidth=760&fidelity=grand) *A glimpse of the modern interface.*
+    [![Constellation Text Editor Screenshot](https://i.imgur.com/TMPvhoy_d.webp?maxwidth=760&fidelity=grand)](https://i.imgur.com/TMPvhoy_d.webp?maxwidth=760&fidelity=grand)
+    *A glimpse of the modern interface.*
 *   **Syntax Highlighting:** Supports syntax highlighting for Java and Python files.  Basic auto-highlighting is also included for other file types.
 *   **Line Numbering:** Displays line numbers for easy navigation and code referencing.  Handles text wrapping correctly.
 *   **Find Functionality:**  Includes a basic "Find" feature to locate specific text within the document.
@@ -17,8 +18,24 @@ Constellation is a modern and lightweight text editor designed for a clean and e
 *   **Encrypted File Support (.ctxt):**  Constellation supports reading and writing encrypted files it's own `.ctxt` extension.
 *   **Cross Platform:** Built with JavaFX, allowing for potential cross-platform support (Windows, macOS, Linux).  *(Specify which platforms you've tested on if applicable)*.
 
+## Technology Used
+
+*   [JavaFX](https://github.com/openjdk/jfx): Cross-platform UI development.
+*   [Maven](https://maven.apache.org/): Build automation and dependency management.
+*   [RichTextFX](https://github.com/FXMisc/RichTextFX): Syntax highlighting and rich text editing.
+  
+
 ## Installation
 
-ima add this in a second
+
 
 **Building from Source:**
+
+To build to a jar from source simply:
+*  Download the source code
+*  Make sure you're using java 21 or up
+*  Extract the downloaded source zip
+*  run ```mvn package``` in command line
+*  go to the 'target' folder and run the jar!
+  
+

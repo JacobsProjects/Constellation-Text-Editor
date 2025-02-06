@@ -22,6 +22,7 @@ import javafx.scene.paint.Color;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 
+
 import java.io.*;
 import java.util.Collection;
 
@@ -51,7 +52,6 @@ public class TextEditor extends VBox {
         fileNameLabel.setStyle("-fx-padding: 5 0 5 0;");
         ctxtHandler = new CtxFiles();
 
-
         setMinHeight(400);
         setPrefHeight(Region.USE_COMPUTED_SIZE);
         VBox.setVgrow(this, Priority.ALWAYS);
@@ -61,45 +61,42 @@ public class TextEditor extends VBox {
         setupMenuBar();
         handleDragAndDrop();
 
+
         lineNumberScrollPane.setFitToWidth(true);
+        lineNumberScrollPane.setFitToHeight(true);
+        lineNumberScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         lineNumberScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        lineNumberScrollPane.setPrefWidth(40); 
+        lineNumberScrollPane.setMinWidth(40);
+        lineNumberScrollPane.setMaxWidth(40);
+        
 
         textArea.estimatedScrollYProperty().addListener((obs, oldVal, newVal) -> {
             lineNumberBox.setTranslateY(-newVal.doubleValue());
         });
 
-        textArea.textProperty().addListener((obs, oldText, newText) -> {
-            updateLineNumbers();
-        });
 
-        textArea.heightProperty().addListener((obs, oldVal, newVal) -> {
-            updateLineNumbers();
-        });
+        ScrollPane textAreaScrollPane = new ScrollPane(textArea);
+        textAreaScrollPane.setFitToWidth(true);
+        textAreaScrollPane.setFitToHeight(true);
+        textAreaScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        textAreaScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        HBox.setHgrow(textAreaScrollPane, Priority.ALWAYS);
 
-        
-        textArea.widthProperty().addListener((obs, oldVal, newVal) -> {
-            if (textArea.isWrapText()) {
-                updateLineNumbers();
-            }
-        });
 
-        HBox editorArea = new HBox(lineNumberScrollPane, textArea);
-        HBox.setHgrow(textArea, Priority.ALWAYS);
+        HBox editorArea = new HBox(lineNumberScrollPane, textAreaScrollPane);
+        HBox.setHgrow(editorArea, Priority.ALWAYS);
         VBox.setVgrow(editorArea, Priority.ALWAYS);
-        lineNumberScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        lineNumberScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
-        addStatusBar();
-
-        getChildren().addAll(menuBar, editorArea, statusBar);
-
-        updateLineNumbers();
 
         textArea.textProperty().addListener((obs, oldText, newText) -> {
             updateLineNumbers();
             updateFileName();
         });
 
+        addStatusBar();
+        getChildren().addAll(menuBar, editorArea, statusBar);
+        updateLineNumbers();
     }
 
     public boolean hasUnsavedChanges() {
@@ -113,6 +110,7 @@ public class TextEditor extends VBox {
         alert.showAndWait();
     }
 
+    @SuppressWarnings("exports")
     public ButtonType showSaveConfirmation() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Unsaved Changes");

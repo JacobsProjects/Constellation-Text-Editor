@@ -15,6 +15,14 @@
         <javafx.version>21</javafx.version>
     </properties>
 
+    <repositories>
+        <repository>
+          <id>central</id>
+          <name>bintray</name>
+          <url>https://jcenter.bintray.com</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -54,6 +62,12 @@
             <artifactId>flowless</artifactId>
             <version>0.7.2</version>
         </dependency>  
+        <dependency>
+            <groupId>io.github.CDAGaming</groupId>
+            <artifactId>DiscordIPC</artifactId>
+            <version>0.10.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

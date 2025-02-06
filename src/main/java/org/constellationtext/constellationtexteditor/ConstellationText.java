@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -54,10 +55,9 @@ public class ConstellationText extends Application {
             createStarShape(stars, x, y);
         }
 
-
         Scene scene = new Scene(root, 1200, 800);
         scene.setFill(Color.web("#0b1e29"));
-        primaryStage.setOpacity(0.9); // remember to change this later, 1.0 is just for debugging
+        primaryStage.setOpacity(0.95); // remember to change this later, 1.0 is just for debugging
 
         Image icon = new Image(getClass().getResource("/icon.png").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());

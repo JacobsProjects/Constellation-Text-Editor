@@ -6,6 +6,7 @@ module org.constellationtext.constellationtexteditor {
     requires reactfx;
 
 
+
     opens org.constellationtext.constellationtexteditor to javafx.fxml;
     exports org.constellationtext.constellationtexteditor;
     

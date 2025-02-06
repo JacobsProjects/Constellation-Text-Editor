@@ -12,11 +12,8 @@
     -fx-text-fill: white;
     -fx-font-family: 'Inter';
     -fx-font-size: 14px;
-    -fx-pref-width: 100%;
-    -fx-pref-height: 100%;
-    -fx-min-height: 0;
+    -fx-min-height: 0; /* Important: Remove pref height */
     -fx-font-feature-settings: "liga" on, "calt" on;
-    
 }
 
 .code-area .content {
@@ -31,13 +28,9 @@
 
 .scroll-pane {
     -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-border-width: 0; 
     -fx-padding: 5px 10px;
     -fx-font-size: 15px;
-    -fx-fit-to-height: true;
-    -fx-fit-to-width: true;
-    -fx-border-color: transparent transparent transparent #506470; 
-    -fx-border-width: 0 0 0 1px; 
 }
 
 .scroll-pane > .viewport {
@@ -60,13 +53,15 @@
 }
 
 .lineNumberBox {
-    -fx-text-fill: #506470; 
-    -fx-text-fill: #ecf0f1; 
+    -fx-pref-width: 40px;
+    -fx-min-width: 40px;
+    -fx-max-width: 40px;
+    -fx-text-fill: #ecf0f1;
     -fx-padding: 5px;
     -fx-font-family: 'Inter';
     -fx-font-size: 14px;
-    -fx-border-color: transparent #506470 transparent transparent; 
-    -fx-border-width: 0 1px 0 0; 
+    -fx-border-color: transparent #506470 transparent transparent;
+    -fx-border-width: 0 1px 0 0;
 }
 
 .line-number-text {

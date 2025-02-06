@@ -20,9 +20,9 @@ Constellation is a modern and lightweight text editor designed for a clean and e
 
 ## Technology Used
 
-*   [JavaFX](https://github.com/openjdk/jfx): Cross-platform UI development.
+*   [JavaFX](https://github.com/openjdk/jfx): UI development.
 *   [Maven](https://maven.apache.org/): Build automation and dependency management.
-*   [RichTextFX](https://github.com/FXMisc/RichTextFX): Syntax highlighting and rich text editing.
+*   [RichTextFX](https://github.com/FXMisc/RichTextFX): Syntax highlighting.
   
 
 ## Installation

@@ -26,13 +26,15 @@ public class ConstellationText extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        UpdateChecker.setHostServices(getHostServices());
+        UpdateChecker.checkForUpdates();
+
         root = new VBox();
         StackPane mainContainer = new StackPane();
         Pane stars = new Pane();
         mainContainer.setPrefSize(1200, 800);
         mainContainer.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         VBox.setVgrow(mainContainer, Priority.ALWAYS);
-
 
         Font.loadFont(getClass().getResourceAsStream("/fonts/SourceCodePro-Regular.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/fonts/SourceCodePro-Bold.ttf"), 16);

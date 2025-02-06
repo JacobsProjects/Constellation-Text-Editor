@@ -6,7 +6,7 @@
 
     <groupId>org.constellationtext</groupId>
     <artifactId>Constellation-Text-Editor</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>Constellation-Text-Editor</name>
 
     <properties>
@@ -21,6 +21,8 @@
           <name>bintray</name>
           <url>https://jcenter.bintray.com</url>
         </repository>
+
+
     </repositories>
 
     <dependencies>

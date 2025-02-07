@@ -6,6 +6,7 @@ Constellation is a modern and lightweight text editor designed for a clean and e
 
 *   **Modern Interface:** Constellation boasts a clean and modern look and feel, designed to minimize distractions and maximize your focus on writing.  
     [![Constellation Text Editor Screenshot](https://i.imgur.com/TMPvhoy_d.webp?maxwidth=760&fidelity=grand)](https://i.imgur.com/TMPvhoy_d.webp?maxwidth=760&fidelity=grand)
+    
     *A glimpse of the modern interface.*
 *   **Syntax Highlighting:** Supports syntax highlighting for Java and Python files.  Basic auto-highlighting is also included for other file types.
 *   **Line Numbering:** Displays line numbers for easy navigation and code referencing.  Handles text wrapping correctly.

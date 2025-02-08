@@ -16,7 +16,7 @@ Constellation is a modern and lightweight text editor designed for a clean and e
 *   **Status Bar:**  Provides information about the current file, cursor position (line and column), and file type.
 *   **Customizable Opacity:** Adjust the window opacity to your preference.
 *   **Text Wrapping:** Toggle text wrapping to control how lines are displayed.
-*   **Encrypted File Support (.ctxt):**  Constellation supports reading and writing encrypted files it's own `.ctxt` extension.
+*   **Encrypted File Support (.ctxt):**  Constellation supports reading and writing encrypted files in it's own `.ctxt` extension.
 *   **Cross Platform:** Built with JavaFX, allowing for potential cross-platform support (Windows, macOS, Linux).  *(Specify which platforms you've tested on if applicable)*.
 
 ## Technology Used
